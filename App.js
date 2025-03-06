@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, SafeAreaView, FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { CheckBox } from "@rneui/themed";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function App() {
@@ -24,15 +23,14 @@ export default function App() {
 
   const addTask = () => {
     if (newTask.trim() !== "") {
-      const newTaskItem = {
+      setTasks([...tasks, {
         id: uuidv4(),
         description: newTask,
         completed: false,
         end: endDate || "No Deadline",
-      };
-      setTasks([...tasks, newTaskItem]);
+      }]);
       setNewTask("");
-      setEndDate(""); 
+      setEndDate("");
     }
   };
 
@@ -40,23 +38,23 @@ export default function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const filteredTasks = showCompleted
-    ? tasks
-    : tasks.filter((task) => !task.completed);
+  const filteredTasks = showCompleted ? tasks : tasks.filter((task) => !task.completed);
 
   const renderItem = ({ item }) => (
     <View style={styles.taskContainer}>
-      <CheckBox
-        checked={item.completed}
+      <TouchableOpacity
         onPress={() => toggleTask(item.id)}
-        checkedColor="green"
-      />
+        style={[
+          styles.checkbox,
+          item.completed && styles.checkedCheckbox,
+        ]}
+      >
+        {item.completed && <Text style={styles.checkmark}>✓</Text>}
+      </TouchableOpacity>
       <Text style={[styles.taskText, item.completed && styles.completedText]}>
         {item.description}
       </Text>
-      <Text style={styles.dateText}>
-        Deadline: {item.end}
-      </Text>
+      <Text style={styles.dateText}>Deadline: {item.end}</Text>
       <TouchableOpacity style={styles.deleteButton} onPress={() => deleteTask(item.id)}>
         <Text style={styles.deleteButtonText}>Delete</Text>
       </TouchableOpacity>
@@ -73,7 +71,11 @@ export default function App() {
         </Text>
       </TouchableOpacity>
 
-      <FlatList data={filteredTasks} renderItem={renderItem} keyExtractor={(item) => item.id.toString()} />
+      <FlatList
+        data={filteredTasks}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -85,12 +87,12 @@ export default function App() {
           returnKeyType="done"
         />
         <TextInput
-            style={styles.input}
-            placeholder="Deadline"
-            value={endDate}
-            onChangeText={setEndDate}
-            onSubmitEditing={addTask}
-            returnKeyType="done"
+          style={styles.input}
+          placeholder="Deadline"
+          value={endDate}
+          onChangeText={setEndDate}
+          onSubmitEditing={addTask}
+          returnKeyType="done"
         />
         <TouchableOpacity style={styles.addButton} onPress={addTask}>
           <Text style={styles.addButtonText}>Add Task</Text>
@@ -188,5 +190,24 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 14,
     fontWeight: "bold",
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "gray",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  checkedCheckbox: {
+    borderColor: "green",
+  },
+  checkmark: {
+    color: "green",
+    fontSize: 20, 
+    fontWeight: "bold", 
   },
 });
