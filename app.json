@@ -2,6 +2,8 @@
   "expo": {
     "name": "new-todo-app",
     "slug": "new-todo-app",
+    "web": {
+      "bundler": "webpack",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,6 +25,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    } 
     }
   }
 }

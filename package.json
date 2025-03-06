@@ -8,19 +8,23 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "predeploy": "npx expo export --platform web",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "expo export:web",
+    "deploy": "gh-pages -d web-build"
   },
   "dependencies": {
     "@expo/metro-runtime": "latest",
+    "@expo/webpack-config": "~19.0.1",
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.8",
-    "expo": "~52.0.37",
+    "crypto-browserify": "^3.12.1",
+    "expo": "^50.0.0",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
     "react-dom": "^18.3.1",
     "react-native": "0.76.7",
-    "react-native-web": "~0.19.13"
+    "react-native-web": "~0.19.13",
+    "stream-browserify": "^3.0.0",
+    "vm-browserify": "^1.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
