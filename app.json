@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "new-todo-app",
-    "slug": "new-todo-app",
+    "name": "new-todo-app1",
+    "slug": "new-todo-app1",
     "web": {
       "bundler": "webpack",
     "version": "1.0.0",

@@ -1,8 +1,8 @@
 {
-  "name": "new-todo-app",
+  "name": "new-todo-app1",
   "version": "1.0.0",
   "main": "index.js",
-  "homepage": "https://raychgot.github.io/new-todo-app/",
+  "homepage": "https://raychgot.github.io/new-todo-app1/",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
